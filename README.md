@@ -1,4 +1,6 @@
 NeuralNetworks
 ==============
+Intro
+-----
 
-Personal repo used to keep track of my experimentation with neural networks, for courses and for fun.
+This is a personal repository intended for maintaining my attempts to learning about neural networks. 
