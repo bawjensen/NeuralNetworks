@@ -60,17 +60,17 @@ void NeuralNetwork::setNumNodes(int n) {
 // }
 
 void NeuralNetwork::train(float* inputArray, int inputLength, float* outputArray, int outputLength) {
-	default_random_engine generator;
-	normal_distribution<double> distribution(5.0, 2.0);
-	float* runResultArray;
+	// default_random_engine generator;
+	// normal_distribution<double> distribution(5.0, 2.0);
+	// float runResult;
 
-	for (int cEpoch = 0; cEpoch < this->epochLimit; cEpoch++) {
-		for (int i = 0; i < inputLength; i++) {
-			runResultArray = this->run(inputArray[i]);
-		}
+	// for (int cEpoch = 0; cEpoch < this->epochLimit; cEpoch++) {
+	// 	for (int i = 0; i < inputLength; i++) {
+	// 		runResult = this->run(inputArray[i]);
+	// 	}
 
-		if 
-	}
+	// 	if 
+	// }
 }
 
 float NeuralNetwork::run(float input) {

@@ -7,8 +7,8 @@ using namespace std;
 
 class NeuralNetwork {
 private:
-	long numHLayers;
-	long nodePerLayer;
+	long nLayers;
+	long nNodes;
 
 	float** net;
 
@@ -16,6 +16,9 @@ private:
 public:
 	NeuralNetwork();
 	// NeuralNetwork(int, int);
+
+	void setNumNodes(int);
+	void setNumLayers(int);
 
 	void train(float*, int, float*, int);
 
