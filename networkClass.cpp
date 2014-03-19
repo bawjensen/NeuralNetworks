@@ -76,19 +76,6 @@ void NeuralNetwork::train(float input, float expectedOutput) {
 	for (int i = 0; i < this->nLayers; i++) {
 
 	}
-
-
-	// default_random_engine generator;
-	// normal_distribution<double> distribution(5.0, 2.0);
-	// float runResult;
-
-	// for (int cEpoch = 0; cEpoch < this->epochLimit; cEpoch++) {
-	// 	for (int i = 0; i < inputLength; i++) {
-	// 		runResult = this->run(inputArray[i]);
-	// 	}
-
-	// 	if 
-	// }
 }
 
 void NeuralNetwork::train(float* inputArray, int inputLength, float* outputArray, int outputLength) {
