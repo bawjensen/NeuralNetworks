@@ -17,7 +17,7 @@ int main() {
 	nn.train(6, 8);
 
 	cout << nn << endl;
-	
+
 
 	return 0;
 }

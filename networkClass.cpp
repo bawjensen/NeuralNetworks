@@ -112,16 +112,16 @@ float NeuralNetwork::run(float input) {
 
 ostream& operator<<(ostream& co, const NeuralNetwork& nn) {
 	if (nn.created) {
-		co << setfill('-') << setw(5) << '-';
+		co << setfill(' ') << setw(13) << ' '; 	// Pre-header row spacing
 		for (int i = 0; i < nn.nLayers; i++) {
-			co << "Layer " << i << " ";
+			co << "Layer " << i << "   "; 		// Labelling layers
 		}
-		co << endl;
+		co << endl; // End header row
 
 		for (int j = 0; j < nn.nNodes; j++) {
-			co << "Node " << j << ": ";
+			co << "Node " << j << ": "; 		// Label row
 			for (int i = 0; i < nn.nLayers; i++) {
-				co << nn.net[i][j] << " ";
+				co << setw(9) << nn.net[i][j] << " "; // Output data
 			}
 			co << endl;
 		}
