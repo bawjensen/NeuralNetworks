@@ -9,7 +9,5 @@ int main() {
 
 	nn.setNumNodes(5);
 
-	cout << "Blah" << endl;
-
 	return 0;
 }

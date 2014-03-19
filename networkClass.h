@@ -13,6 +13,8 @@ private:
 	float** net;
 
 	int epochLimit;
+
+	void createLayers();
 public:
 	NeuralNetwork();
 	// NeuralNetwork(int, int);
