@@ -44,20 +44,6 @@ void NeuralNetwork::setNumNodes(int n) {
 		this->createLayers();
 }
 
-// NeuralNetwork::NeuralNetwork(int numLayers, int numNodes) {
-// 	cout << "Creating new parameterized network." << endl;
-
-// 	this->hNetwork = new float*[numLayers];
-
-// 	for (int cLayer = 0; cLayer < numLayers; cLayer++) {
-// 		this->hNetwork[cLayer] = new float[numNodes];
-
-// 		for (int cNode = 0; cNode < numNodes; cNode++) {
-// 			this->hNetwork[cLayer][cNode] = 1;
-// 		}
-// 	}
-// }
-
 void NeuralNetwork::train(float* inputArray, int inputLength, float* outputArray, int outputLength) {
 	// default_random_engine generator;
 	// normal_distribution<double> distribution(5.0, 2.0);
