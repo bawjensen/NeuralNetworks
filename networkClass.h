@@ -23,10 +23,13 @@ public:
 	void setNumNodes(int);
 	void setNumLayers(int);
 
+	void mutate();
 	void train(float, float);
 	void train(float*, int, float*, int);
 
 	float run(float);
+
+	NeuralNetwork& operator=(const NeuralNetwork&);
 
 	friend ostream& operator<<(ostream&, const NeuralNetwork&);
 };

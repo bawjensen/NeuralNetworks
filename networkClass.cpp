@@ -69,13 +69,23 @@ void NeuralNetwork::setNumNodes(int n) {
 		this->createLayers();
 }
 
-void NeuralNetwork::train(float input, float expectedOutput) {
-
-	float* tempArray = new float[this->nLayers];
-
+void NeuralNetwork::mutate() {
 	for (int i = 0; i < this->nLayers; i++) {
-
+		for (int j = 0; j < this->nNodes; j++) {
+			this->net[i][j] += .1;
+		}
 	}
+}
+
+void NeuralNetwork::train(float input, float expectedOutput) {
+	NeuralNetwork tempNN = (*this);
+	tempNN.mutate();
+
+	// float* tempArray = new float[this->nLayers];
+
+	// for (int i = 0; i < this->nLayers; i++) {
+
+	// }
 }
 
 void NeuralNetwork::train(float* inputArray, int inputLength, float* outputArray, int outputLength) {
@@ -96,6 +106,24 @@ float NeuralNetwork::run(float input) {
 
 	return 0.0f;
 }
+
+NeuralNetwork& NeuralNetwork::operator=(const NeuralNetwork& other) {
+	this->deleteLayers();
+
+	this->nLayers = other.nLayers;
+	this->nNodes = other.nNodes;
+
+	this->createLayers();
+
+	for (int i = 0; i < this->nLayers; i++) {
+		for (int j = 0; j < this->nNodes; j++) {
+			this->net[i][j] = other.net[i][j];
+		}
+	}
+
+	return (*this);
+}
+
 
 ostream& operator<<(ostream& co, const NeuralNetwork& nn) {
 	if (nn.created) {
