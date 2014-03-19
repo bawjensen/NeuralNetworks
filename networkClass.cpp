@@ -2,8 +2,8 @@
 
 #include "networkClass.h"
 
-void NeuralNetwork::createLayers() {
-	cout << "Creating " << this->nLayers << " layer(s) of " << this->nNodes << " nodes each." << endl;
+void NeuralNetwork::deleteLayers() {
+	cout << "Deleting " << this->nLayers << " layer(s) of " << this->nNodes << " nodes each." << endl;
 
 	// Removing the old net
 	if (this->net) { // If it's not NULL - aka it's been previously initialized
@@ -13,6 +13,12 @@ void NeuralNetwork::createLayers() {
 
 		delete[] this->net; // Remove the overall array
 	}
+
+	this->created = false;
+}
+
+void NeuralNetwork::createLayers() {
+	cout << "Creating " << this->nLayers << " layer(s) of " << this->nNodes << " nodes each." << endl;
 
 	// Creating the new net
 	this->net = new float*[this->nLayers];
@@ -46,18 +52,18 @@ NeuralNetwork::NeuralNetwork() {
 void NeuralNetwork::setNumLayers(int n) {
 	// NOTE: Setting new values for either nodes or layers will delete all existing data
 	if (this->created)
-		this->deleteLayers();
+		this->deleteLayers(); // Delete before setting, or the dimensions will be wrong
 
 	this->nLayers = n;
 
 	if (this->nNodes)
-		this->createLayers;
+		this->createLayers();
 }
 
 void NeuralNetwork::setNumNodes(int n) {
 	// NOTE: Setting new values for either nodes or layers will delete all existing data
 	if (this->created)
-		this->deleteLayers();
+		this->deleteLayers(); // Delete before setting, or the dimensions will be wrong
 
 	this->nNodes = n;
 
