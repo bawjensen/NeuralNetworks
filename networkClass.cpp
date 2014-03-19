@@ -72,6 +72,14 @@ void NeuralNetwork::setNumNodes(int n) {
 }
 
 void NeuralNetwork::train(float input, float expectedOutput) {
+
+	float* tempArray = new float[this->nLayers];
+
+	for (int i = 0; i < this->nLayers; i++) {
+
+	}
+
+
 	// default_random_engine generator;
 	// normal_distribution<double> distribution(5.0, 2.0);
 	// float runResult;
@@ -102,4 +110,10 @@ void NeuralNetwork::train(float* inputArray, int inputLength, float* outputArray
 float NeuralNetwork::run(float input) {
 
 	return 0.0f;
+}
+
+ostream& operator<<(ostream& co, const NeuralNetwork& nn) {
+	co << "Test";
+
+	return co;
 }

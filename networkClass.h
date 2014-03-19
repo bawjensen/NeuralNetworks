@@ -25,6 +25,8 @@ public:
 	void train(float*, int, float*, int);
 
 	float run(float);
+
+	friend ostream& operator<<(ostream&, const NeuralNetwork&);
 };
 
 #endif
