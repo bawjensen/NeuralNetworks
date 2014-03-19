@@ -12,6 +12,8 @@ private:
 
 	float** net;
 
+	bool created;
+
 	int epochLimit;
 
 	void createLayers();
