@@ -17,11 +17,11 @@ private:
 	void fillNet();
 public:
 	NeuralNetwork();
-	// NeuralNetwork(int, int);
 
 	void setNumNodes(int);
 	void setNumLayers(int);
 
+	void train(float, float);
 	void train(float*, int, float*, int);
 
 	float run(float);
