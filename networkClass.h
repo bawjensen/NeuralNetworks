@@ -16,6 +16,7 @@ private:
 
 	int epochLimit;
 
+	void deleteLayers();
 	void createLayers();
 	void fillNet();
 public:

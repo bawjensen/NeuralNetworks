@@ -21,6 +21,8 @@ void NeuralNetwork::createLayers() {
 		this->net[i] = new float[this->nNodes];
 	}
 
+	this->created = true;
+
 	this->fillNet();
 }
 
@@ -35,23 +37,28 @@ void NeuralNetwork::fillNet() {
 
 NeuralNetwork::NeuralNetwork() {
 	cout << "Creating new default network." << endl;
+	this->nLayers = 0;
+	this->nNodes = 0;
 	this->net = NULL;
 	this->created = false;
 }
 
 void NeuralNetwork::setNumLayers(int n) {
 	// NOTE: Setting new values for either nodes or layers will delete all existing data
-	if (this->nNodes)
-		this->createLayers();
+	if (this->created)
+		this->deleteLayers();
 
 	this->nLayers = n;
 
 	if (this->nNodes)
-		this->
+		this->createLayers;
 }
 
 void NeuralNetwork::setNumNodes(int n) {
 	// NOTE: Setting new values for either nodes or layers will delete all existing data
+	if (this->created)
+		this->deleteLayers();
+
 	this->nNodes = n;
 
 	if (this->nLayers)
