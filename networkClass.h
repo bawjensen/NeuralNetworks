@@ -7,13 +7,9 @@ using namespace std;
 
 class NeuralNetwork {
 private:
-	long nLayers;
-	long nNodes;
-
+	long nLayers, nNodes;
 	float** net;
-
 	bool created;
-
 	int epochLimit;
 
 	void deleteLayers();
