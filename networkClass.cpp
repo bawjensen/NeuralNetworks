@@ -14,12 +14,22 @@ void NeuralNetwork::createLayers() {
 		delete[] this->net; // Remove the overall array
 	}
 
-
 	// Creating the new net
 	this->net = new float*[this->nLayers];
 
 	for (int i = 0; i < this->nLayers; i++) {
 		this->net[i] = new float[this->nNodes];
+	}
+
+	this->fillNet();
+}
+
+void NeuralNetwork::fillNet() {
+	// Fills the net with 0's
+	for (int i = 0; i < this->nLayers; i++) {
+		for (int j = 0; j < this->nNodes; j++) {
+			this->net[i][j] = 0;
+		}
 	}
 }
 

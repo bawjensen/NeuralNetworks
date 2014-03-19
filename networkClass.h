@@ -15,6 +15,7 @@ private:
 	int epochLimit;
 
 	void createLayers();
+	void fillNet();
 public:
 	NeuralNetwork();
 	// NeuralNetwork(int, int);
