@@ -2,6 +2,10 @@
 
 #include "networkClass.h"
 
+void NeuralNetwork::createLayers() {
+	cout << "Creating " << this->nLayers << " layer(s) of " << this->nNodes << " nodes each." << endl;
+}
+
 NeuralNetwork::NeuralNetwork() {
 	cout << "Creating new default network." << endl;
 	this->net = NULL;
@@ -13,7 +17,7 @@ void NeuralNetwork::setNumLayers(int n) {
 
 	if (this->nNodes)
 		this->createLayers();
-	
+
 	// if (this->nNodes) {
 	// 	for (int i = 0; i > n; i++) {
 	// 		if (this->net[i]) delete[] this->net[i];
@@ -40,14 +44,17 @@ void NeuralNetwork::setNumLayers(int n) {
 }
 
 void NeuralNetwork::setNumNodes(int n) {
-	if ( !(this->net) ) return;
+	// if ( !(this->net) ) return;
 
 	this->nNodes = n;
 
-	for (int i = 0; i < this->nLayers; i++) {
-		if (this->net[i]) delete[] this->net[i];
-		this->net[i] = new float[this->nNodes];
-	}
+	if (this->nLayers)
+		this->createLayers();
+
+	// for (int i = 0; i < this->nLayers; i++) {
+	// 	if (this->net[i]) delete[] this->net[i];
+	// 	this->net[i] = new float[this->nNodes];
+	// }
 }
 
 // NeuralNetwork::NeuralNetwork(int numLayers, int numNodes) {
