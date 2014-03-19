@@ -1,5 +1,3 @@
-#include <random>
-
 #include "networkClass.h"
 
 void NeuralNetwork::deleteLayers() {
@@ -113,7 +111,24 @@ float NeuralNetwork::run(float input) {
 }
 
 ostream& operator<<(ostream& co, const NeuralNetwork& nn) {
-	co << "Test";
+	if (nn.created) {
+		co << setfill('-') << setw(5) << '-';
+		for (int i = 0; i < nn.nLayers; i++) {
+			co << "Layer " << i << " ";
+		}
+		co << endl;
+
+		for (int j = 0; j < nn.nNodes; j++) {
+			co << "Node " << j << ": ";
+			for (int i = 0; i < nn.nLayers; i++) {
+				co << nn.net[i][j] << " ";
+			}
+			co << endl;
+		}
+	}
+	else {
+		co << "Error: Network not yet created!";
+	}
 
 	return co;
 }

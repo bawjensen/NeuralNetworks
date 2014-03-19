@@ -2,6 +2,8 @@
 #define _NNCLASS
 
 #include <iostream>
+#include <random>
+#include <iomanip>
 
 using namespace std;
 
