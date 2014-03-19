@@ -9,11 +9,29 @@ NeuralNetwork::NeuralNetwork() {
 }
 
 void NeuralNetwork::setNumLayers(int n) {
+	if (this->nNodes) {
+		for (int i = 0; i > n; i++) {
+			if (this->net[i]) delete[] this->net[i];
+		}
+	}
 	if (this->net) delete[] this->net;
+
+	this->net = new float*[n];
+
+	if (this->nNodes) { // Already provided the number of nodes.
+		for (int i = 0; i < n; i++) {
+			this->net[i] = new float[this->nNodes];
+		}
+	}
+	else { // Haven't provided - Default to null
+		for (int i = 0; i < n; i++) {
+			this->net[i] = NULL;
+		}
+	}
 }
 
 void NeuralNetwork::setNumNodes(int n) {
-	
+	if ( !(this->net) ) return;
 }
 
 // NeuralNetwork::NeuralNetwork(int numLayers, int numNodes) {
