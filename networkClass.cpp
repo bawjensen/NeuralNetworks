@@ -74,5 +74,6 @@ void NeuralNetwork::train(float* inputArray, int inputLength, float* outputArray
 }
 
 float NeuralNetwork::run(float input) {
-	
+
+	return 0.0f;
 }
