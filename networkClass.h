@@ -10,7 +10,7 @@ private:
 	long numHLayers;
 	long nodePerLayer;
 
-	float** hNetwork;
+	float** net;
 
 	int epochLimit;
 public:

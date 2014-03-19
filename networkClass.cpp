@@ -4,7 +4,16 @@
 
 NeuralNetwork::NeuralNetwork() {
 	cout << "Creating new default network." << endl;
+	this->net = NULL;
 
+}
+
+void NeuralNetwork::setNumLayers(int n) {
+	if (this->net) delete[] this->net;
+}
+
+void NeuralNetwork::setNumNodes(int n) {
+	
 }
 
 // NeuralNetwork::NeuralNetwork(int numLayers, int numNodes) {
