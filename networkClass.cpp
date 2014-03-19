@@ -4,30 +4,19 @@
 
 void NeuralNetwork::createLayers() {
 	cout << "Creating " << this->nLayers << " layer(s) of " << this->nNodes << " nodes each." << endl;
-}
 
-NeuralNetwork::NeuralNetwork() {
-	cout << "Creating new default network." << endl;
-	this->net = NULL;
+	// Removing the old net
+	if (this->net) { // If it's not NULL - aka it's been previously initialized
+		for (int i = 0; i < this->nLayers; i++) {
+			if (this->net[i]) delete[] this->net[i]; // Remove any previously allocated layers
+		}
 
-}
-
-void NeuralNetwork::setNumLayers(int n) {
-	this->nLayers = n;
-
-	if (this->nNodes)
-		this->createLayers();
-
-	// if (this->nNodes) {
-	// 	for (int i = 0; i > n; i++) {
-	// 		if (this->net[i]) delete[] this->net[i];
-	// 	}
-	// }
-	// if (this->net) delete[] this->net;
+		delete[] this->net; // Remove the overall array
+	}
 
 
-
-	// this->net = new float*[n];
+	// Creating the new net
+	this->net = new float*[n];
 
 
 
@@ -41,6 +30,18 @@ void NeuralNetwork::setNumLayers(int n) {
 	// 		this->net[i] = NULL;
 	// 	}
 	// }
+}
+
+NeuralNetwork::NeuralNetwork() {
+	cout << "Creating new default network." << endl;
+	this->net = NULL;
+}
+
+void NeuralNetwork::setNumLayers(int n) {
+	this->nLayers = n;
+
+	if (this->nNodes)
+		this->createLayers();
 }
 
 void NeuralNetwork::setNumNodes(int n) {
