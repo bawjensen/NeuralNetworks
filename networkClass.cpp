@@ -16,20 +16,11 @@ void NeuralNetwork::createLayers() {
 
 
 	// Creating the new net
-	this->net = new float*[n];
+	this->net = new float*[this->nLayers];
 
-
-
-	// if (this->nNodes) { // Already provided the number of nodes
-	// 	for (int i = 0; i < n; i++) {
-	// 		this->net[i] = new float[this->nNodes];
-	// 	}
-	// }
-	// else { // Haven't provided - Default to null
-	// 	for (int i = 0; i < n; i++) {
-	// 		this->net[i] = NULL;
-	// 	}
-	// }
+	for (int i = 0; i < this->nLayers; i++) {
+		this->net[i] = new float[this->nNodes];
+	}
 }
 
 NeuralNetwork::NeuralNetwork() {
