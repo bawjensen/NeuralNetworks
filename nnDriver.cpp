@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-	NeuralNetwork nn(1, 5);
+	NeuralNetwork nn;
 
 	cout << "Blah" << endl;
 

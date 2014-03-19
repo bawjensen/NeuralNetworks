@@ -15,7 +15,7 @@ private:
 	int epochLimit;
 public:
 	NeuralNetwork();
-	NeuralNetwork(int, int);
+	// NeuralNetwork(int, int);
 
 	void train(float*, int, float*, int);
 
