@@ -70,16 +70,28 @@ void NeuralNetwork::setNumNodes(int n) {
 }
 
 void NeuralNetwork::mutate() {
+	// cout << "Mutation on: " << endl;
+	// cout << (*this) << endl;
 	for (int i = 0; i < this->nLayers; i++) {
 		for (int j = 0; j < this->nNodes; j++) {
 			this->net[i][j] += .1;
 		}
 	}
+	// cout << "Final:" << endl;
+	// cout << (*this) << endl;
 }
 
 void NeuralNetwork::train(float input, float expectedOutput) {
 	NeuralNetwork tempNN = (*this);
+	cout << "Before: " << endl;
+	cout << (*this) << endl;
+
 	tempNN.mutate();
+
+	cout << "After: " << endl;
+	cout << (*this) << endl;
+
+
 
 	// float* tempArray = new float[this->nLayers];
 
