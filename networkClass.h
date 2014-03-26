@@ -14,11 +14,13 @@ private:
 	bool created;
 	int epochLimit;
 
+	void init();
 	void deleteLayers();
 	void createLayers();
 	void fillNet();
 public:
 	NeuralNetwork();
+	NeuralNetwork(const NeuralNetwork&);
 
 	void setNumNodes(int);
 	void setNumLayers(int);

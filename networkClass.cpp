@@ -1,7 +1,26 @@
 #include "networkClass.h"
 
+NeuralNetwork::NeuralNetwork(const NeuralNetwork& other) {
+	// cout << "Routed via the copy constructor" << endl;
+	this->init();
+	(*this) = other;
+}
+
+NeuralNetwork::NeuralNetwork() {
+	// cout << "Creating new default network." << endl;
+	this->init();
+}
+
+void NeuralNetwork::init() {
+	// cout << "Initializing network" << endl;
+	this->nLayers = 0;
+	this->nNodes = 0;
+	this->net = NULL;
+	this->created = false;
+}
+
 void NeuralNetwork::deleteLayers() {
-	cout << "Deleting " << this->nLayers << " layer(s) of " << this->nNodes << " nodes each." << endl;
+	// cout << "Deleting " << this->nLayers << " layer(s) of " << this->nNodes << " nodes each." << endl;
 
 	// Removing the old net
 	if (this->net) { // If it's not NULL - aka it's been previously initialized
@@ -16,7 +35,7 @@ void NeuralNetwork::deleteLayers() {
 }
 
 void NeuralNetwork::createLayers() {
-	cout << "Creating " << this->nLayers << " layer(s) of " << this->nNodes << " nodes each." << endl;
+	// cout << "Creating " << this->nLayers << " layer(s) of " << this->nNodes << " nodes each." << endl;
 
 	// Creating the new net
 	this->net = new float*[this->nLayers];
@@ -37,14 +56,6 @@ void NeuralNetwork::fillNet() {
 			this->net[i][j] = 0;
 		}
 	}
-}
-
-NeuralNetwork::NeuralNetwork() {
-	cout << "Creating new default network." << endl;
-	this->nLayers = 0;
-	this->nNodes = 0;
-	this->net = NULL;
-	this->created = false;
 }
 
 void NeuralNetwork::setNumLayers(int n) {
@@ -74,7 +85,7 @@ void NeuralNetwork::mutate() {
 	// cout << (*this) << endl;
 	for (int i = 0; i < this->nLayers; i++) {
 		for (int j = 0; j < this->nNodes; j++) {
-			this->net[i][j] += .1;
+			this->net[i][j] += 0.1;
 		}
 	}
 	// cout << "Final:" << endl;
@@ -83,13 +94,13 @@ void NeuralNetwork::mutate() {
 
 void NeuralNetwork::train(float input, float expectedOutput) {
 	NeuralNetwork tempNN = (*this);
-	cout << "Before: " << endl;
-	cout << (*this) << endl;
+	// cout << "Before: " << endl;
+	// cout << (*this) << endl;
 
 	tempNN.mutate();
 
-	cout << "After: " << endl;
-	cout << (*this) << endl;
+	// cout << "After: " << endl;
+	// cout << (*this) << endl;
 
 
 
@@ -120,7 +131,12 @@ float NeuralNetwork::run(float input) {
 }
 
 NeuralNetwork& NeuralNetwork::operator=(const NeuralNetwork& other) {
+	// cout << "Starting copy!" << endl;
+	// cout << "RH: " << other.net << endl;
+
+	// cout << "Deleting layers of LH: " << this->net << endl;
 	this->deleteLayers();
+	// cout << "Done:" << this->net << endl;
 
 	this->nLayers = other.nLayers;
 	this->nNodes = other.nNodes;
@@ -139,7 +155,8 @@ NeuralNetwork& NeuralNetwork::operator=(const NeuralNetwork& other) {
 
 ostream& operator<<(ostream& co, const NeuralNetwork& nn) {
 	if (nn.created) {
-		co << setfill(' ') << setw(13) << ' '; 	// Pre-header row spacing
+		co << "Network at address: " << nn.net << endl;
+		co << setfill(' ') << setw(10) << ' '; 	// Pre-header row spacing
 		for (int i = 0; i < nn.nLayers; i++) {
 			co << "Layer " << i << "   "; 		// Labelling layers
 		}
