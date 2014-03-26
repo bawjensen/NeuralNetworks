@@ -9,8 +9,8 @@
 # 	CFLAGS=		$(CPATHS)$(CLIBS)
 # endif
 
-nn:			nnDriver.cpp networkClass.cpp
-			g++ nnDriver.cpp networkClass.cpp -o nn
+nn:			main.cpp networkClass.cpp
+			g++ main.cpp networkClass.cpp -o nn
 
 # testing:		testing.cpp
 # 			g++ testing.cpp -o testing -w $(CFLAGS)
