@@ -9,7 +9,7 @@
 # 	CFLAGS=		$(CPATHS)$(CLIBS)
 # endif
 
-nn:			main.cpp networkClass.cpp
+nn:			main.cpp networkClass.cpp networkClass.h
 			g++ main.cpp networkClass.cpp -o nn
 
 # testing:		testing.cpp
