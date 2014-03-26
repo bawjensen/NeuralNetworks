@@ -4,6 +4,7 @@
 #include <iostream>
 #include <random>
 #include <iomanip>
+#include <cmath>
 
 using namespace std;
 
@@ -24,6 +25,7 @@ public:
 
 	void setNumNodes(int);
 	void setNumLayers(int);
+	void setEpochLimit(int);
 
 	void mutate();
 	void train(float, float);

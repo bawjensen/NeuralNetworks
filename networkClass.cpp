@@ -80,6 +80,10 @@ void NeuralNetwork::setNumNodes(int n) {
 		this->createLayers();
 }
 
+void NeuralNetwork::setEpochLimit(int n) {
+	this->epochLimit = n;
+}
+
 void NeuralNetwork::mutate() {
 	// cout << "Mutation on: " << endl;
 	// cout << (*this) << endl;
@@ -97,18 +101,20 @@ void NeuralNetwork::train(float input, float expectedOutput) {
 	// cout << "Before: " << endl;
 	// cout << (*this) << endl;
 
-	tempNN.mutate();
+	cout << "Limit: " << this->epochLimit << endl;
 
-	// cout << "After: " << endl;
-	// cout << (*this) << endl;
+	for (int i = 0; i < this->epochLimit; i++) {
+		cout << "Epoch number: " << i << endl;
 
+		tempNN.mutate();
 
-
-	// float* tempArray = new float[this->nLayers];
-
-	// for (int i = 0; i < this->nLayers; i++) {
-
-	// }
+		if (abs(this->run(input) - expectedOutput) > abs(tempNN.run(input) - expectedOutput)) {
+			(*this) = tempNN;
+		}
+		else {
+			tempNN = (*this);
+		}
+	}
 }
 
 void NeuralNetwork::train(float* inputArray, int inputLength, float* outputArray, int outputLength) {
@@ -126,8 +132,37 @@ void NeuralNetwork::train(float* inputArray, int inputLength, float* outputArray
 }
 
 float NeuralNetwork::run(float input) {
+	cout << "Running " << input << " over: " << endl;
+	cout << (*this) << endl;
 
-	return 0.0f;
+	float tempArray[this->nNodes];
+	float copyArray[this->nNodes];
+	// float* copyArray;
+	// tempArray = new float[this->nNodes];
+	// copyArray = new float[this->nNodes];
+
+	for (int j = 0; j < this->nNodes; j++) { // Used j because j is current row, not column
+		tempArray[j] = this->net[0][j] * input;
+	}
+
+	for (int i = 1; i < this->nLayers; i++) { // Iterate over layers - Starts at 1, because first layer calc'd manually
+		for (int j = 0; j < this->nNodes; j++) { // Iterate over nodes in layer
+			float sum = 0;
+			for (int k = 0; k < this->nNodes; k++) { // Iterate over nodes in layer - sum to get new value
+				sum += tempArray[k] * this->net[i][j];
+			}
+			copyArray[j] = sum;
+		}
+	}
+
+	float finalSum = 0;
+	for (int i = 0; i < this->nNodes; i++) {
+		finalSum += tempArray[i];
+	}
+
+	cout << "Got: " << finalSum << endl;
+
+	return finalSum;
 }
 
 NeuralNetwork& NeuralNetwork::operator=(const NeuralNetwork& other) {
@@ -140,6 +175,7 @@ NeuralNetwork& NeuralNetwork::operator=(const NeuralNetwork& other) {
 
 	this->nLayers = other.nLayers;
 	this->nNodes = other.nNodes;
+	this->epochLimit = other.epochLimit;
 
 	this->createLayers();
 

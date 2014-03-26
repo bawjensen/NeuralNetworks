@@ -7,24 +7,25 @@ using namespace std;
 int main() {
 	NeuralNetwork nn;
 
-	cout << "Created first" << endl;
+	// cout << "Created first" << endl;
 
 	nn.setNumNodes(5);
 	nn.setNumLayers(1);
+	nn.setEpochLimit(1);
 
-	cout << "Established first" << endl;
-	cout << "Creating second" << endl;
+	// cout << "Established first" << endl;
+	// cout << "Creating second" << endl;
 
 	NeuralNetwork nn2 = nn;
 
-	cout << "Created second" << endl;
+	// cout << "Created second" << endl;
 
-	cout << nn << endl;
+	// cout << "First before: " << endl << nn << endl;
 
 	nn2.train(2, 4);
 
-	cout << nn << endl;
-	cout << nn2 << endl;
+	// cout << "First after: " << endl << nn << endl;
+	// cout << "Second after: " << endl << nn2 << endl;
 
 	// cout << nn << endl;
 
