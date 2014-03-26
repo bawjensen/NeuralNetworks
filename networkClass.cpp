@@ -87,9 +87,16 @@ void NeuralNetwork::setEpochLimit(int n) {
 void NeuralNetwork::mutate() {
 	// cout << "Mutation on: " << endl;
 	// cout << (*this) << endl;
+
+	default_random_engine generator;
+	normal_distribution<double> distribution(0.0, 2.0);
+	srand(time(NULL));
+
+
 	for (int i = 0; i < this->nLayers; i++) {
 		for (int j = 0; j < this->nNodes; j++) {
-			this->net[i][j] += 0.1;
+			float mutateValue = distribution(generator);
+			this->net[i][j] += mutateValue;
 		}
 	}
 	// cout << "Final:" << endl;
@@ -103,23 +110,28 @@ void NeuralNetwork::train(float input, float expectedOutput) {
 
 	cout << "Limit: " << this->epochLimit << endl;
 
+	float oldResult, newResult;
+
 	for (int i = 0; i < this->epochLimit; i++) {
 		cout << "Epoch number: " << i << endl;
 
 		tempNN.mutate();
 
-		if (abs(this->run(input) - expectedOutput) > abs(tempNN.run(input) - expectedOutput)) {
+		oldResult = this->run(input);
+		newResult = tempNN.run(input);
+		cout << "New result: " << newResult << " vs Old result: " << oldResult << endl;
+		if (abs(oldResult - expectedOutput) > abs(newResult - expectedOutput)) {
+			cout << "Choosing mutation" << endl;;
 			(*this) = tempNN;
 		}
 		else {
+			cout << "Ditching mutation" << endl;;
 			tempNN = (*this);
 		}
 	}
 }
 
 void NeuralNetwork::train(float* inputArray, int inputLength, float* outputArray, int outputLength) {
-	// default_random_engine generator;
-	// normal_distribution<double> distribution(5.0, 2.0);
 	// float runResult;
 
 	// for (int cEpoch = 0; cEpoch < this->epochLimit; cEpoch++) {
