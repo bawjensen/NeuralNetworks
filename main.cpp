@@ -11,7 +11,7 @@ int main() {
 
 	nn.setNumNodes(5);
 	nn.setNumLayers(1);
-	nn.setEpochLimit(1);
+	nn.setEpochLimit(10);
 
 	// cout << "Established first" << endl;
 	// cout << "Creating second" << endl;
