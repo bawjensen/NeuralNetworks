@@ -12,6 +12,9 @@
 nn:			main.cpp networkClass.cpp networkClass.h
 			g++ main.cpp networkClass.cpp -o nn
 
+nnp:		mainPrimitive.cpp networkClassPrimitive.cpp networkClassPrimitive.h
+			g++ mainPrimitive.cpp networkClassPrimitive.cpp -o nnp
+
 # testing:		testing.cpp
 # 			g++ testing.cpp -o testing -w $(CFLAGS)
 

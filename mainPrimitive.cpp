@@ -1,7 +1,7 @@
 #include <iostream>
 #include <ctime>
 
-#include "networkClass.h"
+#include "networkClassPrimitive.h"
 
 using namespace std;
 

@@ -10,17 +10,26 @@ using namespace std;
 
 class Node {
 private:
+	int nPointers;
 	Node** pointers;
 	float val;
 
 public:
 	Node();
+
+	void operator=(float);
+	void operator+=(float);
+	float operator*(float);
+
+	friend float operator*(const float&, const Node&);
+	friend ostream& operator<<(ostream&, const Node&);
 };
 
 class NeuralNetwork {
 private:
 	long nLayers, nNodes;
-	float** net;
+	Node** net;
+	// float** net;
 	bool created;
 	int epochLimit;
 

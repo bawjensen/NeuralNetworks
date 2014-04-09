@@ -1,8 +1,31 @@
 #include "networkClass.h"
 
-Node() {
+Node::Node() {
 	this->val = 0.0f;
 }
+
+void Node::operator=(float nVal) {
+	this->val = nVal;
+}
+
+void Node::operator+=(float nVal) {
+	this->val += nVal;
+}
+
+float Node::operator*(float nVal) {
+	return this->val * nVal;
+}
+
+float operator*(const float& leftVal, const Node& rightNode) {
+	return leftVal * rightNode.val;
+}
+
+ostream& operator<<(ostream& co, const Node& node) {
+	co << node.val;
+
+	return co;
+}
+// -------------------------------------------------------------------------------------------------------------------
 
 NeuralNetwork::NeuralNetwork(const NeuralNetwork& other) {
 	// cout << "Routed via the copy constructor" << endl;
@@ -22,7 +45,6 @@ void NeuralNetwork::init() {
 	this->net = NULL;
 	this->created = false;
 	this->generator.seed(time(NULL));
-	// srand(time(NULL));
 }
 
 void NeuralNetwork::deleteLayers() {
@@ -44,10 +66,10 @@ void NeuralNetwork::createLayers() {
 	// cout << "Creating " << this->nLayers << " layer(s) of " << this->nNodes << " nodes each." << endl;
 
 	// Creating the new net
-	this->net = new float*[this->nLayers];
+	this->net = new Node*[this->nLayers];
 
 	for (int i = 0; i < this->nLayers; i++) {
-		this->net[i] = new float[this->nNodes];
+		this->net[i] = new Node[this->nNodes];
 	}
 
 	this->created = true;
@@ -95,7 +117,7 @@ void NeuralNetwork::mutate() {
 	// cout << (*this) << endl;
 
 	// default_random_engine generator;
-	normal_distribution<double> distribution(0.0, 0.1);
+	normal_distribution<double> distribution(0.0, 1.0);
 
 	for (int i = 0; i < this->nLayers; i++) {
 		for (int j = 0; j < this->nNodes; j++) {
@@ -153,20 +175,22 @@ float NeuralNetwork::run(float input) {
 	// cout << "Running " << input << " over: " << endl;
 	// cout << (*this) << endl;
 
-	float tempArray[this->nNodes];
-	float copyArray[this->nNodes];
+	int netHeight = this->nNodes;
+
+	float tempArray[netHeight];
+	float copyArray[netHeight];
 	// float* copyArray;
 	// tempArray = new float[this->nNodes];
 	// copyArray = new float[this->nNodes];
 
-	for (int j = 0; j < this->nNodes; j++) { // Used j because j is current row, not column
+	for (int j = 0; j < netHeight; j++) { // Used j because j is current row, not column
 		tempArray[j] = this->net[0][j] * input;
 	}
 
 	for (int i = 1; i < this->nLayers; i++) { // Iterate over layers - Starts at 1, because first layer calc'd manually
-		for (int j = 0; j < this->nNodes; j++) { // Iterate over nodes in layer
+		for (int j = 0; j < netHeight; j++) { // Iterate over nodes in layer
 			float sum = 0;
-			for (int k = 0; k < this->nNodes; k++) { // Iterate over nodes in layer - sum to get new value
+			for (int k = 0; k < netHeight; k++) { // Iterate over nodes in layer - sum to get new value
 				sum += tempArray[k] * this->net[i][j];
 			}
 			copyArray[j] = sum;
@@ -180,7 +204,7 @@ float NeuralNetwork::run(float input) {
 
 	// cout << "Got: " << finalSum << endl;
 
-	return finalSum;
+	return (finalSum / netHeight);
 }
 
 NeuralNetwork& NeuralNetwork::operator=(const NeuralNetwork& other) {

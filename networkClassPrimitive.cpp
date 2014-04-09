@@ -1,4 +1,4 @@
-#include "networkClass.h"
+#include "networkClassPrimitive.h"
 
 NeuralNetwork::NeuralNetwork(const NeuralNetwork& other) {
 	// cout << "Routed via the copy constructor" << endl;
@@ -91,7 +91,7 @@ void NeuralNetwork::mutate() {
 	// cout << (*this) << endl;
 
 	// default_random_engine generator;
-	normal_distribution<double> distribution(0.0, 0.1);
+	normal_distribution<double> distribution(0.0, 1.0);
 
 	for (int i = 0; i < this->nLayers; i++) {
 		for (int j = 0; j < this->nNodes; j++) {
@@ -176,7 +176,7 @@ float NeuralNetwork::run(float input) {
 
 	// cout << "Got: " << finalSum << endl;
 
-	return finalSum;
+	return (finalSum / this->nNodes);
 }
 
 NeuralNetwork& NeuralNetwork::operator=(const NeuralNetwork& other) {
