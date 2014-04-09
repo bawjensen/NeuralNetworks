@@ -15,7 +15,7 @@ private:
 	bool created;
 	int epochLimit;
 
-	static auto randGen = bind(uniform_int_distribution<double>(), default_random_engine());
+	default_random_engine generator;
 
 	void init();
 	void deleteLayers();
