@@ -8,6 +8,15 @@
 
 using namespace std;
 
+class Node {
+private:
+	Node** pointers;
+	float val;
+
+public:
+	Node();
+};
+
 class NeuralNetwork {
 private:
 	long nLayers, nNodes;

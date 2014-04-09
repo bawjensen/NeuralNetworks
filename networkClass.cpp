@@ -1,5 +1,9 @@
 #include "networkClass.h"
 
+Node() {
+	this->val = 0.0f;
+}
+
 NeuralNetwork::NeuralNetwork(const NeuralNetwork& other) {
 	// cout << "Routed via the copy constructor" << endl;
 	this->init();
