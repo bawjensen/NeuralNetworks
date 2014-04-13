@@ -188,13 +188,14 @@ float NeuralNetwork::run(float input) {
 	}
 
 	for (int i = 1; i < this->nLayers; i++) { // Iterate over layers - Starts at 1, because first layer calc'd manually
-		for (int j = 0; j < netHeight; j++) { // Iterate over nodes in layer
-			float sum = 0;
-			for (int k = 0; k < netHeight; k++) { // Iterate over nodes in layer - sum to get new value
-				sum += tempArray[k] * this->net[i][j];
-			}
-			copyArray[j] = sum; // TODO: Divide by netHeight?
-		}
+		
+		// for (int j = 0; j < netHeight; j++) { // Iterate over nodes in layer
+		// 	float sum = 0;
+		// 	for (int k = 0; k < netHeight; k++) { // Iterate over nodes in layer - sum to get new value
+		// 		sum += tempArray[k] * this->net[i][j];
+		// 	}
+		// 	copyArray[j] = sum; // TODO: Divide by netHeight?
+		// }
 	}
 
 	float finalSum = 0;
