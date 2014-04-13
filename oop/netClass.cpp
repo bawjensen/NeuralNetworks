@@ -193,7 +193,7 @@ float NeuralNetwork::run(float input) {
 			for (int k = 0; k < netHeight; k++) { // Iterate over nodes in layer - sum to get new value
 				sum += tempArray[k] * this->net[i][j];
 			}
-			copyArray[j] = sum;
+			copyArray[j] = sum; // TODO: Divide by netHeight?
 		}
 	}
 
