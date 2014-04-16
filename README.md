@@ -6,6 +6,7 @@ This repository contains the extent of my attempts to learn about neural network
 
 ## Useful(?) Libraries
 ### Python
+- Theano
 - PyBrain
 - SciKitLearn
 
