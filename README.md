@@ -7,6 +7,7 @@ This repository contains the extent of my attempts to learn about neural network
 ## Useful(?) Libraries
 ### Python
 - PyBrain
+- SciKitLearn
 
 ### C++
 - FANN
