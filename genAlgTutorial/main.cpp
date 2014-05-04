@@ -5,22 +5,57 @@
 
 using namespace std;
 
+char toChar(int n) {
+	return n + '0';
+}
+
 int toInt(char c) {
 	return c - '0';
 }
 
-float parseMath(string statement) {
-	for (int i = 0; i < statement.length(); i++) {
-		string newStatement = "";
+string toString(int x) {
+	ostringstream convert;
 
-		if (statement[i] == '*') {
-			float value = toInt(statement[i-1]) * toInt(statement[i+1]);
+	convert << x;
+
+	return convert.str();
+}
+
+float parseMath(string statement) {
+	cout << "Statement: " << statement << endl;
+
+	string newStatement = "";
+	for (int i = 0; i < statement.length(); i++) {
+		if (statement[i] == '*' or statement[i] == '/') {
+			int value;
+			if (statement[i] == '*')
+				value = toInt(statement[i-1]) * toInt(statement[i+1]);
+			else if (statement[i] == '/')
+				value = toInt(statement[i-1]) / toInt(statement[i+1]);
+
+			cout << "Value: " << value << endl;
 
 			for (int j = 0; j < i-1; j++) {
 				newStatement += statement[j];
 			}
+
+			cout << "toChar: " << toChar(value) << endl;
+
+			newStatement += toChar(value);
+
+			for (int j = i+2; j < statement.length(); j++) {
+				newStatement += statement[j];
+			}
+
+			cout << "After, new: " << newStatement << endl;
+
+			statement = newStatement;
 		}
 	}
+
+	statement = newStatement;
+
+	cout << "New: " << newStatement << endl;
 
 	return 0.0f;
 }
@@ -47,19 +82,18 @@ bool isNumber(char test) {
 	else return false;
 }
 
-string toString(int x) {
-	ostringstream convert;
-
-	convert << x;
-
-	return convert.str();
-}
-
-int main() {
-	int chromLength = 6;
-	int geneLength = 4;
+string generateChromosome(int chromLength, int geneLength) {
+	srand(time(NULL));
 	string chromosome = "";
 
+	for (int i = 0; i < chromLength*geneLength; i++) {
+		chromosome += toString(rand() % 2);
+	}
+
+	return chromosome;
+}
+
+string binaryDecode(string codedChromosome) {
 	map<string, char> decode;
 
 	decode["0000"] = '0';
@@ -77,32 +111,39 @@ int main() {
 	decode["1100"] = '*';
 	decode["1101"] = '/';
 
-	srand(time(NULL));
-
-	for (int i = 0; i < chromLength*geneLength; i++) {
-		chromosome += toString(rand() % 2);
-	}
-
-	string gene, mathStatement;
+	string gene;
+	string decodedChromosome = "";
 	char decodedGene;
-	char lastOperation = '\0';
-	int value, tempValue;
 
-	bool wantNumber = true; // Start out by looking for a number
-	bool wantOperator = false; // Start out by NOT looking for an operator
-
-	for (int i = 0; i < chromLength*geneLength; i += geneLength) {
+	for (int i = 0; i < codedChromosome.length(); i += 4) {
 		gene = "";
 
 		for (int j = i; j < (i+4); j++)
-			gene += chromosome[j];
+			gene += codedChromosome[j];
 
 		decodedGene = decode[gene];
 
-		mathStatement += decodedGene;
+		decodedChromosome += decodedGene;
 	}
-	cout << chromosome << endl;
-	cout << mathStatement << endl;
 
-	float result = parseMath(mathStatement);
+	return decodedChromosome;
+}
+
+void doGenetics() {
+
+	string chromosome = generateChromosome(6, 4);
+
+	string statement = binaryDecode(chromosome);
+
+	cout << chromosome << endl;
+
+	float result = parseMath(statement);
+}
+
+int main() {
+	// doGenetics();
+	//			   1   +   2   *   9   /   3
+	string test = "0001101000101100100111010011";
+
+	cout << parseMath(binaryDecode(test)) << endl;
 }
