@@ -5,6 +5,26 @@
 
 using namespace std;
 
+int toInt(char c) {
+	return c - '0';
+}
+
+float parseMath(string statement) {
+	for (int i = 0; i < statement.length(); i++) {
+		string newStatement = "";
+
+		if (statement[i] == '*') {
+			float value = toInt(statement[i-1]) * toInt(statement[i+1]);
+
+			for (int j = 0; j < i-1; j++) {
+				newStatement += statement[j];
+			}
+		}
+	}
+
+	return 0.0f;
+}
+
 bool isOperator(char test) {
 	if (test == '+'
 		or test == '-'
@@ -60,14 +80,10 @@ int main() {
 	srand(time(NULL));
 
 	for (int i = 0; i < chromLength*geneLength; i++) {
-		// cout << "i: " << i << endl;
-		// cout << "rand: " << toString(rand() % 2) << endl;
 		chromosome += toString(rand() % 2);
 	}
 
-	cout << "chromosome: " << chromosome << endl;
-
-	string gene;
+	string gene, mathStatement;
 	char decodedGene;
 	char lastOperation = '\0';
 	int value, tempValue;
@@ -81,39 +97,12 @@ int main() {
 		for (int j = i; j < (i+4); j++)
 			gene += chromosome[j];
 
-		cout << "i: " << i << endl;
-
-		cout << "gene: " << gene << endl;
-
 		decodedGene = decode[gene];
 
-		if (isNumber(decodedGene) and wantNumber) {
-			wantNumber = false;
-			wantOperator = true;
-
-			tempValue = decodedGene - '0';
-
-			if (lastOperation != '\0') {
-				if (lastOperation == '+')
-					value += tempValue;
-				if (lastOperation == '-')
-					value -= tempValue;
-				if (lastOperation == '*')
-					value *= tempValue;
-				if (lastOperation == '/')
-					value /= tempValue;
-			}
-			else {
-				value = tempValue;
-			}
-		}
-		else if (isOperator(decodedGene) and wantOperator) {
-			wantOperator = false;
-			wantNumber = true;
-
-			lastOperation = decodedGene;
-		}
+		mathStatement += decodedGene;
 	}
+	cout << chromosome << endl;
+	cout << mathStatement << endl;
 
-	cout << "value: " << value << endl;
+	float result = parseMath(mathStatement);
 }
